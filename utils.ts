@@ -1,4 +1,4 @@
-import { To, KeyCode, Manipulator, KarabinerRules } from "./types";
+import { KarabinerRules, KeyCode, Manipulator, To } from "./types";
 
 /**
  * Custom way to describe a command in a layer
@@ -201,6 +201,7 @@ export function rectangle(name: string): LayerCommand {
         shell_command: `open -g rectangle://execute-action?name=${name}`,
       },
     ],
+
     description: `Window: ${name}`,
   };
 }
