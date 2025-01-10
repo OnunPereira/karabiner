@@ -1,6 +1,6 @@
 import fs from "fs";
 import { KarabinerRules } from "./types";
-import { app, createHyperSubLayers, open, rectangle } from "./utils";
+import { app, createHyperSubLayers, rectangle } from "./utils";
 
 const rules: KarabinerRules[] = [
   // Define the Hyper key itself
@@ -35,42 +35,35 @@ const rules: KarabinerRules[] = [
         ],
         type: "basic",
       },
-      //      {
-      //        type: "basic",
-      //        description: "Disable CMD + Tab to force Hyper Key usage",
-      //        from: {
-      //          key_code: "tab",
-      //          modifiers: {
-      //            mandatory: ["left_command"],
-      //          },
-      //        },
-      //        to: [
-      //          {
-      //            key_code: "tab",
-      //          },
-      //        ],
-      //      },
+      {
+        type: "basic",
+        description: "Disable CMD + Tab to force Hyper Key usage",
+        from: {
+          key_code: "tab",
+          modifiers: {
+            mandatory: ["left_command"],
+          },
+        },
+        to: [
+          {
+            key_code: "tab",
+          },
+        ],
+      },
     ],
   },
   ...createHyperSubLayers({
-    // b = "B"rowse
-    b: {
-      t: open("https://twitter.com"),
-      y: open("https://news.ycombinator.com"),
-      r: open("https://reddit.com"),
-      h: open("https://hashnode.com/draft"),
-    },
-    // o = "Open" applications
-    l: {
-      b: app("Bitwarden"),
+    // a = Applications
+    a: {
+      b: app("Arc"),
       m: app("Spotify"),
       c: app("Calendar"),
       v: app("Visual Studio Code"),
       t: app("Alacritty"),
       f: app("Finder"),
     },
-    // w = "Window" via rectangle.app
-    w: {
+    // d = "Display" via rectangle.app
+    d: {
       y: rectangle("previous-display"),
       o: rectangle("next-display"),
       k: rectangle("top-half"),
