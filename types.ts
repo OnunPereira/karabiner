@@ -9,6 +9,7 @@ export interface Manipulator {
   from: From;
   to?: To[];
   to_after_key_up?: To[];
+  to_delayed_action?: ToDelayedAction;
   to_if_alone?: To[];
   parameters?: Parameters;
   conditions?: Conditions[];
@@ -142,6 +143,11 @@ export interface To {
    * @see: {@link https://karabiner-elements.pqrs.org/docs/json/complex-modifications-manipulator-definition/to/software_function/iokit_power_management_sleep_system/}
    */
   software_function?: SoftwareFunction;
+}
+
+export interface ToDelayedAction {
+  to_if_invoked?: To[];
+  to_if_canceled?: To[];
 }
 
 export interface MouseKey {
