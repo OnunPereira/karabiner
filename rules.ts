@@ -52,15 +52,103 @@ const rules: KarabinerRules[] = [
       },
     ],
   },
+  {
+    description: "Caps Lock to Ctrl when held, Escape when tapped alone",
+    manipulators: [
+      {
+        from: {
+          key_code: "caps_lock",
+        },
+        to: [
+          {
+            key_code: "left_control",
+          },
+        ],
+        to_if_alone: [
+          {
+            key_code: "escape",
+          },
+        ],
+        type: "basic",
+      },
+    ],
+  },
+  {
+    description: "Double left shift to Caps Lock",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "left_shift",
+          modifiers: {
+            optional: ["any"],
+          },
+        },
+        to: [
+          {
+            key_code: "caps_lock",
+          },
+        ],
+        conditions: [
+          {
+            type: "variable_if",
+            name: "left_shift pressed",
+            value: 1,
+          },
+        ],
+      },
+      {
+        type: "basic",
+        from: {
+          key_code: "left_shift",
+          modifiers: {
+            optional: ["any"],
+          },
+        },
+        to: [
+          {
+            set_variable: {
+              name: "left_shift pressed",
+              value: 1,
+            },
+          },
+          {
+            key_code: "left_shift",
+          },
+        ],
+        to_delayed_action: {
+          to_if_invoked: [
+            {
+              set_variable: {
+                name: "left_shift pressed",
+                value: 0,
+              },
+            },
+          ],
+          to_if_canceled: [
+            {
+              set_variable: {
+                name: "left_shift pressed",
+                value: 0,
+              },
+            },
+          ],
+        },
+      },
+    ],
+  },
   ...createHyperSubLayers({
     // a = Applications
     a: {
-      b: app("Arc"),
-      m: app("Spotify"),
+      h: app("Alacritty"),
+      j: app("Arc"),
+      k: app("Visual Studio Code"),
+      l: app("Spotify"),
+      r: app("Reminders"),
       c: app("Calendar"),
-      v: app("Visual Studio Code"),
-      t: app("Alacritty"),
       f: app("Finder"),
+      s: app("System Settings"),
+      b: app("Bitwarden"),
     },
     // d = "Display" via rectangle.app
     d: {
