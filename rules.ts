@@ -149,6 +149,7 @@ const rules: KarabinerRules[] = [
       f: app("Finder"),
       s: app("System Settings"),
       b: app("Bitwarden"),
+      t: app("Microsoft Teams"),
     },
     // d = "Display" via rectangle.app
     d: {
