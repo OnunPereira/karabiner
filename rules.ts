@@ -5,17 +5,17 @@ import { app, createHyperSubLayers, rectangle } from "./utils";
 const rules: KarabinerRules[] = [
 	// Define the Hyper key itself
 	{
-		description: "App layer",
+		description: "Hyper layer",
 		manipulators: [
 			{
-				description: "; -> App Key",
+				description: "; -> Hyper Key",
 				from: {
 					key_code: "semicolon",
 				},
 				to: [
 					{
 						set_variable: {
-							name: "app",
+							name: "hyper",
 							value: 1,
 						},
 					},
@@ -23,7 +23,7 @@ const rules: KarabinerRules[] = [
 				to_after_key_up: [
 					{
 						set_variable: {
-							name: "app",
+							name: "hyper",
 							value: 0,
 						},
 					},
@@ -148,7 +148,7 @@ const rules: KarabinerRules[] = [
 
 	...createHyperSubLayers({
 		// a = Applications
-		semicolon: {
+		a: {
 			h: app("Ghostty"),
 			j: app("Arc"),
 			k: app("Visual Studio Code"),
