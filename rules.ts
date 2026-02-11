@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'node:fs';
 import { KarabinerRules } from './types';
 import { app, createHyperSubLayers, rectangle } from './utils';
 
@@ -35,23 +35,24 @@ const rules: KarabinerRules[] = [
         ],
         type: 'basic',
       },
-      {
-        type: 'basic',
-        description: 'Disable CMD + Tab to force Hyper Key usage',
-        from: {
-          key_code: 'tab',
-          modifiers: {
-            mandatory: ['left_command'],
-          },
-        },
-        to: [
-          {
-            key_code: 'tab',
-          },
-        ],
-      },
+      // {
+      //   type: 'basic',
+      //   description: 'Disable CMD + Tab to force Hyper Key usage',
+      //   from: {
+      //     key_code: 'tab',
+      //     modifiers: {
+      //       mandatory: ['left_command'],
+      //     },
+      //   },
+      //   to: [
+      //     {
+      //       key_code: 'tab',
+      //     },
+      //   ],
+      // },
     ],
   },
+
   {
     description: 'Caps Lock to Ctrl when held, Escape when tapped alone',
     manipulators: [
@@ -76,13 +77,21 @@ const rules: KarabinerRules[] = [
       },
     ],
   },
+
   {
-    description: 'Double left shift to Caps Lock',
+    description: 'Left + Right Shift together to Caps Lock',
     manipulators: [
       {
         type: 'basic',
         from: {
-          key_code: 'left_shift',
+          simultaneous: [
+            {
+              key_code: 'left_shift',
+            },
+            {
+              key_code: 'right_shift',
+            },
+          ],
           modifiers: {
             optional: ['any'],
           },
@@ -92,63 +101,17 @@ const rules: KarabinerRules[] = [
             key_code: 'caps_lock',
           },
         ],
-        conditions: [
-          {
-            type: 'variable_if',
-            name: 'left_shift pressed',
-            value: 1,
-          },
-        ],
-      },
-      {
-        type: 'basic',
-        from: {
-          key_code: 'left_shift',
-          modifiers: {
-            optional: ['any'],
-          },
-        },
-        to: [
-          {
-            set_variable: {
-              name: 'left_shift pressed',
-              value: 1,
-            },
-          },
-          {
-            key_code: 'left_shift',
-          },
-        ],
-        to_delayed_action: {
-          to_if_invoked: [
-            {
-              set_variable: {
-                name: 'left_shift pressed',
-                value: 0,
-              },
-            },
-          ],
-          to_if_canceled: [
-            {
-              set_variable: {
-                name: 'left_shift pressed',
-                value: 0,
-              },
-            },
-          ],
-        },
         parameters: {
-          'basic.to_delayed_action_delay_milliseconds': 300,
+          'basic.simultaneous_threshold_milliseconds': 250,
         },
       },
     ],
   },
+
   ...createHyperSubLayers({
-    // a = Applications
+    // a = apps
     a: {
-      h: app('Alacritty'),
       j: app('Arc'),
-      k: app('Visual Studio Code'),
       l: app('Spotify'),
       r: app('Reminders'),
       c: app('Calendar'),
@@ -156,11 +119,19 @@ const rules: KarabinerRules[] = [
       s: app('System Settings'),
       b: app('Bitwarden'),
       t: app('Microsoft Teams'),
+      o: app('Obsidian'),
+      m: app('Microsoft Outlook'),
     },
-    // d = "Display" via rectangle.app
+    // d = dev apps
     d: {
-      y: rectangle('previous-display'),
-      o: rectangle('next-display'),
+      j: app('Ghostty'),
+      k: app('IntelliJ IDEA Ultimate'),
+      l: app('Bruno'),
+    },
+
+    // w = "Window" via rectangle.app
+    w: {
+      spacebar: rectangle('next-display'),
       k: rectangle('top-half'),
       j: rectangle('bottom-half'),
       h: rectangle('left-half'),
@@ -213,6 +184,7 @@ const rules: KarabinerRules[] = [
         ],
       },
     },
+
     // s = "System"
     s: {
       u: {
@@ -252,6 +224,7 @@ const rules: KarabinerRules[] = [
         ],
       },
     },
+
     // v = "moVe" which isn't "m" because we want it to be on the left hand
     // so that hjkl work like they do in vim
     v: {
