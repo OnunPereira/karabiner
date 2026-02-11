@@ -36,19 +36,19 @@ const rules: KarabinerRules[] = [
 				type: "basic",
 			},
 			// {
-			//   type: "basic",
-			//   description: "Disable CMD + Tab to force App Key usage",
-			//   from: {
-			//     key_code: "tab",
-			//     modifiers: {
-			//       mandatory: ["left_command"],
-			//     },
-			//   },
-			//   to: [
-			//     {
-			//       key_code: "tab",
-			//     },
-			//   ],
+			// 	type: "basic",
+			// 	description: "Disable CMD + Tab to force App Key usage",
+			// 	from: {
+			// 		key_code: "tab",
+			// 		modifiers: {
+			// 			mandatory: ["left_command"],
+			// 		},
+			// 	},
+			// 	to: [
+			// 		{
+			// 			key_code: "tab",
+			// 		},
+			// 	],
 			// },
 		],
 	},
@@ -149,9 +149,7 @@ const rules: KarabinerRules[] = [
 	...createHyperSubLayers({
 		// a = Applications
 		a: {
-			h: app("Ghostty"),
-			j: app("Arc"),
-			k: app("Visual Studio Code"),
+			j: app("Zen"),
 			l: app("Spotify"),
 			r: app("Reminders"),
 			c: app("Calendar"),
@@ -160,10 +158,15 @@ const rules: KarabinerRules[] = [
 			b: app("Bitwarden"),
 		},
 
-		// d = "Display" via rectangle.app
+		// d = Development Apps
 		d: {
-			y: rectangle("previous-display"),
-			o: rectangle("next-display"),
+			j: app("Ghostty"),
+			k: app("Visual Studio Code"),
+		},
+
+		// d = "Display" via rectangle.app
+		w: {
+			spacebar: rectangle("next-display"),
 			k: rectangle("top-half"),
 			j: rectangle("bottom-half"),
 			h: rectangle("left-half"),
