@@ -12,6 +12,7 @@
   },
   "scripts": {
     "build": "tsm rules.ts",
-    "watch": "nodemon --exec yarn build -e ts"
+    "watch": "nodemon --exec yarn build -e ts",
+    "format": "prettier --write ."
   }
 }
