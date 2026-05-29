@@ -53,6 +53,28 @@ const rules: KarabinerRules[] = [
         ],
     },
     {
+        description: "Caps Lock to Escape + Control",
+        manipulators: [
+            {
+                type: "basic",
+                from: {
+                    key_code: "caps_lock",
+                    modifiers: {
+                        optional: ["any"],
+                    },
+                },
+                to_if_alone: [
+                    {
+                        key_code: "escape",
+                    },
+                ],
+                parameters: {
+                    "basic.simultaneous_threshold_milliseconds": 250,
+                },
+            },
+        ],
+    },
+    {
         description: "Left + Right Shift together to Caps Lock",
         manipulators: [
             {
