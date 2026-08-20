@@ -79,6 +79,26 @@ const rules: KarabinerRules[] = [
   },
 
   {
+    description: '§ -> Grave Accent',
+    manipulators: [
+      {
+        from: {
+          key_code: 'non_us_backslash',
+          modifiers: {
+            optional: ['any'],
+          },
+        },
+        to: [
+          {
+            key_code: 'grave_accent_and_tilde',
+          },
+        ],
+        type: 'basic',
+      },
+    ],
+  },
+
+  {
     description: 'Left + Right Shift together to Caps Lock',
     manipulators: [
       {
