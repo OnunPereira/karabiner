@@ -63,14 +63,17 @@ const rules: KarabinerRules[] = [
                         optional: ["any"],
                     },
                 },
+                to: [
+                    {
+                        key_code: "left_control",
+                        lazy: true,
+                    },
+                ],
                 to_if_alone: [
                     {
                         key_code: "escape",
                     },
                 ],
-                parameters: {
-                    "basic.simultaneous_threshold_milliseconds": 250,
-                },
             },
         ],
     },
